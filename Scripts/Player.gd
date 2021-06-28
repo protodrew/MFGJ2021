@@ -22,3 +22,6 @@ func _physics_process(delta):
 		
 	velocity = move_and_slide(velocity) # used for kinematic bodies, moves the KinematicBody2D and stops if a collision occurs multiplied by delta so framerate doesn't affect 
 
+func pos():
+	var pos = Vector2(self.position.x,self.position.y)
+	return pos
