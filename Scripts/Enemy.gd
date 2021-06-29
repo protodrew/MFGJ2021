@@ -1,36 +1,46 @@
-extends ColorRect
+extends KinematicBody2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-onready var cast = $RayCast2D
+signal state_changed(new_state)
 onready var col = $Area2D
-var entered = false;
 var player = null
+const SPEED = 50
+const patrolsize = 100
+var velocity = Vector2.ZERO
+
+enum States{
+	PATROL,
+	ENGAGE
+}
 # Called when the node enters the scene tree for the first time.
+var current_state = States.PATROL setget set_state
 
-
+func set_state(new_state: int ):
+	if new_state == current_state:
+		return
+	
+	current_state = new_state
+	emit_signal("state_changed", current_state)
 
 func _on_Area2D_body_entered(body):
-	player = body
-	entered = true;
-	
+	if body.is_in_group("player"):
+		set_state(States.ENGAGE)
+		player = body
 		
-func _process(delta):
-	if entered:
-		fov()
-	else:
-		cast.set_cast_to(Vector2(0,0))
+
 
 
 func _on_Area2D_body_exited(body):
-	entered = false;
-
-func fov():
-	cast.set_cast_to(Vector2(player.position.x-8,player.position.y-8))
-	if cast.get_collider() != null and cast.get_collider().name == "Player":
-	 print("shown")
-	else:
-		print("hidden")
+	if body.is_in_group("player"):
+		set_state(States.PATROL)
+		player = null
+	
+func _process(delta):
+	match current_state:
+		States.ENGAGE:
+			velocity = position.direction_to(player.position) * SPEED
+		States.PATROL:
+			velocity = Vector2.ZERO
 		
+	
+	velocity = move_and_slide(velocity)
+
