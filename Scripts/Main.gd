@@ -1,12 +1,35 @@
 extends Node2D
 
-var lvl1 = preload("res://Levels/Level1.tscn").instance()
-var menu = preload("res://Levels/StartMenu.tscn").instance()
-# Called when the node enters the scene tree for the first time.
+var lvl1 = "res://Levels/Level1.tscn"
+var menu = "res://Levels/StartMenu.tscn"
+var restart = "res://Levels/Restart.tscn"
+var checkpoint = "-1";
+
 func _ready():
-	add_child(menu)
-	
+	change("1")
+
+func _process(delta):
+	if Input.is_action_just_pressed("ui_restart") and checkpoint != "-1":
+		change(checkpoint)
+
 func change(var lvl):
-	if lvl == "1":
-		remove_child(menu)
-		add_child(lvl1)
+	match lvl:
+		"0":
+			clear()
+			add_child(load(menu).instance())
+		"1":
+			clear()
+			add_child(load(lvl1).instance())
+		99:
+			clear()
+			add_child(load(restart).instance())
+	
+		
+func restart(level):
+		checkpoint = level
+		change(99)
+		
+		
+func clear():
+	for n in self.get_children():
+		self.remove_child(n)
