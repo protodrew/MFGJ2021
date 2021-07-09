@@ -4,7 +4,7 @@ var inview = false
 var question = preload("res://Scenes/huh.tscn").instance()
 var exclamation = preload("res://Scenes/AHA.tscn").instance()
 var count = 20
-var speed = 30
+var speed = 60
 onready var shape = $CollisionShape2D
 
 func _process(delta):
@@ -17,11 +17,13 @@ func _process(delta):
 	if count == 0:
 		get_parent().get_parent().restart(get_parent().name.substr(get_parent().name.length() - 1, 1))
 		
-	if rotation_degrees == 0 or rotation_degrees == 180:
+	if int(ceil(abs(rotation_degrees))) % 180 == 0 or int(floor(abs(rotation_degrees))) % 180 == 0:
 		move_and_slide(Vector2(0,speed))
 	else:
 		move_and_slide(Vector2(-speed,0))
 		
+	print(rotation_degrees)
+	
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("player"):
 		inview = true
