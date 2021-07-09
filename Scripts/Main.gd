@@ -3,7 +3,7 @@ extends Node2D
 var lvl1 = "res://Levels/Level1.tscn"
 var menu = "res://Levels/StartMenu.tscn"
 var restart = "res://Levels/Restart.tscn"
-var checkpoint = "-1";
+var checkpoint = "-1"
 
 func _ready():
 	change("1")
@@ -26,8 +26,8 @@ func change(var lvl):
 	
 		
 func restart(level):
-		checkpoint = level
-		change(99)
+	checkpoint = level
+	change(99)
 		
 		
 func clear():
