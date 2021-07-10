@@ -1,6 +1,7 @@
 extends Node2D
 
 var lvl1 = "res://Levels/Level1.tscn"
+var lvl2 = "res://Levels/Level2.tscn"
 var menu = "res://Levels/StartMenu.tscn"
 var restart = "res://Levels/Restart.tscn"
 var checkpoint = "-1"
@@ -20,6 +21,9 @@ func change(var lvl):
 		"1":
 			clear()
 			add_child(load(lvl1).instance())
+		"2":
+			clear()
+			add_child(load(lvl2).instance())
 		99:
 			clear()
 			add_child(load(restart).instance())

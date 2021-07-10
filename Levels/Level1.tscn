@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Trap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Art/tileset_tileset01.tres" type="TileSet" id=3]
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Staircase.tscn" type="PackedScene" id=5]
 
-[node name="Level 1" type="Node2D"]
+[node name="Level 1" type="YSort"]
 
 [node name="Walls" type="TileMap" parent="." groups=[
 "wall",
@@ -33,6 +34,9 @@ position = Vector2( 174.818, 426.251 )
 ] instance=ExtResource( 4 )]
 position = Vector2( 650.052, 218.593 )
 rotation = 1.5708
+
+[node name="Staircase" parent="." instance=ExtResource( 5 )]
+position = Vector2( 126.289, 170.251 )
 
 [node name="Trap" parent="." instance=ExtResource( 2 )]
 position = Vector2( 356.672, 467.471 )
