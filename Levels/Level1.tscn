@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Trap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Art/tileset_tileset01.tres" type="TileSet" id=3]
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Staircase.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sfx/Preparing for War.mp3" type="AudioStream" id=6]
 
 [node name="Level 1" type="YSort"]
 
@@ -23,6 +24,11 @@ tile_data = PoolIntArray( -196549, 47, 1, -196548, 47, 2, -196547, 47, 2, -19654
 "player",
 ] instance=ExtResource( 1 )]
 position = Vector2( 371, 257 )
+
+[node name="music" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2( 0.0332642, 1.05835 )
+stream = ExtResource( 6 )
+autoplay = true
 
 [node name="Enemy" parent="." groups=[
 "enemy",

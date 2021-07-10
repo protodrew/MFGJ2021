@@ -7,7 +7,7 @@ var down = load("res://sfx/down.wav")
 var start = load("res://sfx/start.wav")
 func _ready():
 	change_menu_color()
-	
+
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_down"):

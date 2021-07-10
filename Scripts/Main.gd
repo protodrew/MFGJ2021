@@ -7,7 +7,7 @@ var restart = "res://Levels/Restart.tscn"
 var checkpoint = "-1"
 
 func _ready():
-	change("1")
+	change("0")
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_restart") and checkpoint != "-1":
@@ -36,6 +36,7 @@ func restart(level):
 		
 func clear():
 	for n in self.get_children():
-		self.remove_child(n)
+		if n.name != "music":
+			self.remove_child(n)
 
 

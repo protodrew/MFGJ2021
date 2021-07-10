@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/StartMenu.gd" type="Script" id=1]
 [ext_resource path="res://Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://sfx/wind.wav" type="AudioStream" id=3]
+[ext_resource path="res://sfx/Pixel River.mp3" type="AudioStream" id=4]
 
 [sub_resource type="AudioStreamGenerator" id=1]
 
@@ -17,10 +19,10 @@ __meta__ = {
 }
 
 [node name="StartButton" type="ColorRect" parent="."]
-margin_left = 110.596
-margin_top = 17.8381
-margin_right = 202.596
-margin_bottom = 43.8381
+margin_left = 2.97277
+margin_top = 72.2443
+margin_right = 94.9728
+margin_bottom = 98.2443
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -38,10 +40,10 @@ __meta__ = {
 }
 
 [node name="LoadGame" type="ColorRect" parent="."]
-margin_left = 111.785
-margin_top = 64.2172
-margin_right = 203.785
-margin_bottom = 90.2172
+margin_left = 3.26988
+margin_top = 109.407
+margin_right = 95.2699
+margin_bottom = 135.407
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -60,10 +62,10 @@ __meta__ = {
 }
 
 [node name="Quit" type="ColorRect" parent="."]
-margin_left = 111.785
-margin_top = 117.137
-margin_right = 203.785
-margin_bottom = 143.137
+margin_left = 2.67525
+margin_top = 143.002
+margin_right = 94.6752
+margin_bottom = 169.002
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -83,5 +85,17 @@ __meta__ = {
 [node name="sfx" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 156.51, 77.4207 )
 stream = SubResource( 1 )
+volume_db = 6.058
+
+[node name="wind" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 112.083, 77.8931 )
+stream = ExtResource( 3 )
+autoplay = true
+
+[node name="music" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 156.381, 78.1904 )
+stream = ExtResource( 4 )
+volume_db = -9.039
+autoplay = true
 
 [connection signal="finished" from="sfx" to="." method="_on_sfx_finished"]
