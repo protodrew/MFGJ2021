@@ -33,3 +33,5 @@ func restart(level):
 func clear():
 	for n in self.get_children():
 		self.remove_child(n)
+
+
