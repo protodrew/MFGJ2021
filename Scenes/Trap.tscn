@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Trap.gd" type="Script" id=1]
 [ext_resource path="res://Art/trap.png" type="Texture" id=2]
@@ -8,6 +8,42 @@ radius = 36.0815
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 71.6913
+
+[sub_resource type="Animation" id=3]
+resource_name = "active"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "diffused"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( -0.1, 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 4, 5, 6, 7 ]
+}
 
 [node name="Trap" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,13 +55,21 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+hframes = 4
+vframes = 2
+frame = 3
 
 [node name="diffuse" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="diffuse"]
 shape = SubResource( 2 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/active = SubResource( 3 )
+anims/diffused = SubResource( 4 )
+
 [connection signal="body_entered" from="kill" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="kill" to="." method="_on_kill_body_entered"]
 [connection signal="body_shape_entered" from="kill" to="." method="_on_Area2D_body_shape_entered"]
 [connection signal="body_entered" from="diffuse" to="." method="_on_diffuse_body_entered"]
+[connection signal="body_exited" from="diffuse" to="." method="_on_diffuse_body_exited"]

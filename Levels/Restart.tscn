@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/type.gd" type="Script" id=2]
 
 [node name="Restart" type="YSort"]
 
@@ -13,24 +14,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
-margin_left = 119.063
-margin_top = 67.0908
-margin_right = 191.063
-margin_bottom = 83.0908
-custom_fonts/font = ExtResource( 1 )
-text = "You Lose"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Label" type="RichTextLabel" parent="."]
+margin_left = 82.4623
+margin_top = 49.3611
+margin_right = 247.462
+margin_bottom = 117.361
+custom_fonts/bold_italics_font = ExtResource( 1 )
+custom_fonts/italics_font = ExtResource( 1 )
+custom_fonts/bold_font = ExtResource( 1 )
+custom_fonts/normal_font = ExtResource( 1 )
+text = "You Lose
 
-[node name="Label" type="Label" parent="Label"]
-margin_left = -36.8527
-margin_top = 26.1433
-margin_right = 125.147
-margin_bottom = 42.1433
-custom_fonts/font = ExtResource( 1 )
-text = "Press R to Restart"
+Press R to Restart"
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
