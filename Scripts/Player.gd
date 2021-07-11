@@ -5,7 +5,10 @@ const ACCELERATION = 80
 const FRICTION = 40
 var velocity = Vector2.ZERO # initializes an empty Vector2 that will store our X and Y velocity.
 onready var sprite = $Sprite
-
+onready var sfx = $sfx
+onready var sfx2 = $sfxl2
+var switchsnd = load("res://sfx/switch.wav")
+var switchboom = load("res://sfx/switchboom.wav")
 # Called Every Tick that the Physics Updates
 func _physics_process(delta):
 
@@ -19,12 +22,23 @@ func _physics_process(delta):
 			sprite.frame = 2
 		else:
 			sprite.frame -= 1
-			
+		sfx.set_stream(switchsnd)
+		sfx2.set_stream(switchboom)
+		sfx.pitch_scale = rand_range(0.8,1.2)
+		sfx2.play()
+		sfx.play()
+		
 	if Input.is_action_just_pressed("ui_changeR"):
 		if sprite.frame == 2:
 			sprite.frame = 0
 		else:
 			sprite.frame += 1
+		sfx.set_stream(switchsnd)
+		sfx2.set_stream(switchboom)
+		sfx.pitch_scale = rand_range(0.8,1.2)
+		sfx2.play()
+		sfx.play()
+		
 	
 	if input_vector != Vector2.ZERO: #checks we are giving an input
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION) # sets velocity to input vectors as described above

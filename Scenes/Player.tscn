@@ -18,3 +18,9 @@ current = true
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 hframes = 3
+
+[node name="sfx" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+
+[node name="sfxl2" type="AudioStreamPlayer" parent="."]
+volume_db = -12.0
