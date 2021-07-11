@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/type.gd" type="Script" id=2]
+[ext_resource path="res://sfx/blip.wav" type="AudioStream" id=3]
 
 [node name="Restart" type="YSort"]
 
@@ -14,7 +15,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="RichTextLabel" parent="."]
+[node name="rest" type="RichTextLabel" parent="."]
 margin_left = 82.4623
 margin_top = 49.3611
 margin_right = 247.462
@@ -30,3 +31,6 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="rest"]
+stream = ExtResource( 3 )

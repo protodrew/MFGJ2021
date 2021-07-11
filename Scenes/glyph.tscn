@@ -19,7 +19,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 34.2526
+radius = 29.7847
 
 [node name="glyph" type="Sprite"]
 scale = Vector2( 4, 4 )

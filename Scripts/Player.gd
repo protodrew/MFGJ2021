@@ -10,7 +10,12 @@ onready var sfx = $sfx
 var facingright = 1
 var player = "1"
 var isglyph = false
+var canchange = false
 # Called Every Tick that the Physics Updates
+
+func _ready():
+	if get_parent().name == "Level 2":
+		canchange = true
 
 func _physics_process(delta):
 	
@@ -20,7 +25,7 @@ func _physics_process(delta):
 	input_vector = input_vector.normalized() # makes it so that moving diagonally isn't faster than moving in one of the 4 cardinal directions
 	
 	
-	if Input.is_action_just_pressed("player_change"):
+	if Input.is_action_just_pressed("player_change") and canchange == true:
 		sfx.stream = load("res://sfx/switch.wav")
 		sfx.play()
 		

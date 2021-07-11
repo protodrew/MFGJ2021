@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/type.gd" type="Script" id=2]
+[ext_resource path="res://sfx/blip.wav" type="AudioStream" id=3]
+
+[node name="Restart" type="YSort"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = -0.629959
+margin_right = 320.0
+margin_bottom = 179.37
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="rest" type="RichTextLabel" parent="."]
+margin_left = 82.4623
+margin_top = 49.3611
+margin_right = 247.462
+margin_bottom = 117.361
+custom_fonts/bold_italics_font = ExtResource( 1 )
+custom_fonts/italics_font = ExtResource( 1 )
+custom_fonts/bold_font = ExtResource( 1 )
+custom_fonts/normal_font = ExtResource( 1 )
+text = "You Win!
+
+Thanks for playing"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="rest"]
+stream = ExtResource( 3 )

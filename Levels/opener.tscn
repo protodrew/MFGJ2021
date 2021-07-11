@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sfx/blip.wav" type="AudioStream" id=1]
+[ext_resource path="res://Scripts/type.gd" type="Script" id=2]
+[ext_resource path="res://Font.tres" type="DynamicFont" id=3]
+
+[node name="ColorRect" type="ColorRect"]
+margin_left = -4.51984
+margin_top = -4.0347
+margin_right = 333.48
+margin_bottom = 190.965
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 5.0
+margin_right = -19.0
+margin_bottom = -12.0
+custom_fonts/normal_font = ExtResource( 3 )
+text = "The Job is simple. 
+Get past the guards, and free your overlord.There will be a wizard in there who can help you slip by the guards a bit easier.
+
+Good luck minion!
+
+...press Enter or Space to continue"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="RichTextLabel"]
+stream = ExtResource( 1 )

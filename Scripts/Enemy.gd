@@ -9,6 +9,7 @@ onready var anim = $AnimationPlayer
 onready var mv = $Sprite/enemyPlayer
 onready var player = $AudioStreamPlayer
 onready var cone = $Area2D
+onready var viscone = $Polygon2D
 var frozen = false
 var timer = 120
 var facingright = false
@@ -19,7 +20,10 @@ func _ready():
 		bubbles.rotation_degrees = 90
 
 func _process(delta):
+	viscone.rotation_degrees = cone.rotation_degrees
+	
 	if !frozen:
+		$Sprite.self_modulate = "ffffff"
 		if inview == false:
 			if count < 35:
 				count += 1
@@ -31,7 +35,6 @@ func _process(delta):
 		if count == 0:
 			get_parent().get_parent().restart(get_parent().name.substr(get_parent().name.length() - 1, 1))
 			
-		
 			
 		if int(ceil(abs(rotation_degrees))) % 180 == 0 or int(floor(abs(rotation_degrees))) % 180 == 0:
 			
@@ -52,6 +55,7 @@ func _process(delta):
 			
 	else:
 		timer -= 1
+		$Sprite.self_modulate = "005eff"
 	if timer <= 0:
 		frozen = false
 	
@@ -65,9 +69,9 @@ func _on_Area2D_body_entered(body):
 			play_anim("aha")
 			inview = true
 		
-		if body.is_in_group("wall"):
-			cone.rotation_degrees += 180
-			speed *= -1
+	if body.is_in_group("wall"):
+		cone.rotation_degrees += 180
+		speed *= -1
 		
 func _on_Area2D_body_exited(body):
 	if !frozen:
