@@ -1,14 +1,16 @@
 extends KinematicBody2D
 
-const MAX_SPEED = 200
+const MAX_SPEED = 150
 const ACCELERATION = 80
 const FRICTION = 40
 var velocity = Vector2.ZERO # initializes an empty Vector2 that will store our X and Y velocity.
 onready var sprite = $Sprite
+onready var anim = $animation
 onready var sfx = $sfx
 onready var sfx2 = $sfxl2
 var switchsnd = load("res://sfx/switch.wav")
 var switchboom = load("res://sfx/switchboom.wav")
+var facingright = 1
 # Called Every Tick that the Physics Updates
 func _physics_process(delta):
 
@@ -17,33 +19,33 @@ func _physics_process(delta):
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")    # <- fluctuates between -1 and 1 with 0 being the resting place, stored in Vector2 to become yvelocity later
 	input_vector = input_vector.normalized() # makes it so that moving diagonally isn't faster than moving in one of the 4 cardinal directions
 	
-	if Input.is_action_just_pressed("ui_changeL"):
-		if sprite.frame == 0:
-			sprite.frame = 2
-		else:
-			sprite.frame -= 1
-		sfx.set_stream(switchsnd)
-		sfx2.set_stream(switchboom)
-		sfx.pitch_scale = rand_range(0.8,1.2)
-		sfx2.play()
-		sfx.play()
-		
-	if Input.is_action_just_pressed("ui_changeR"):
-		if sprite.frame == 2:
-			sprite.frame = 0
-		else:
-			sprite.frame += 1
-		sfx.set_stream(switchsnd)
-		sfx2.set_stream(switchboom)
-		sfx.pitch_scale = rand_range(0.8,1.2)
-		sfx2.play()
-		sfx.play()
-		
 	
+	if input_vector.x < 0 and facingright:
+		flip()
+	if input_vector.x > 0 and !facingright:
+		flip()
+		
 	if input_vector != Vector2.ZERO: #checks we are giving an input
+		
+		if(input_vector.y < 0):
+			play_anim("up")
+		elif(input_vector.y > 0):
+			play_anim("down")
+		else:
+			play_anim("run")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION) # sets velocity to input vectors as described above
 	else:
+	
+		play_anim("idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION) # moves velocity to zero incrementing by the FRICTION
 		
 	velocity = move_and_slide(velocity) # used for kinematic bodies, moves the KinematicBody2D and stops if a collision occurs multiplied by delta so framerate doesn't affect 
 
+func play_anim(anim_name):
+	if anim.is_playing() and anim.current_animation == anim_name:
+		return
+	anim.play(anim_name)
+
+func flip():
+	facingright = !facingright
+	sprite.flip_h = !sprite.flip_h
